@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:title="@string/sync_settings_title">
+
+    <org.newnewpipe.app.settings.SyncSwitchPreference
+        android:defaultValue="false"
+        android:key="@string/sync_enabled_key"
+        android:summary="@string/sync_enabled_summary"
+        android:title="@string/sync_enabled_title"
+        app:iconSpaceReserved="false" />
+
+    <org.newnewpipe.app.settings.SyncTextPreference
+        android:key="@string/sync_server_url_key"
+        android:inputType="textUri"
+        android:summary="@string/sync_server_url_summary"
+        android:title="@string/sync_server_url_title"
+        app:iconSpaceReserved="false" />
+
+    <org.newnewpipe.app.settings.SyncTextPreference
+        android:key="@string/sync_username_key"
+        android:inputType="text"
+        android:summary="@string/sync_username_summary"
+        android:title="@string/sync_username_title"
+        app:iconSpaceReserved="false" />
+
+    <org.newnewpipe.app.settings.SyncTextPreference
+        android:key="@string/sync_password_key"
+        android:inputType="textPassword"
+        android:summary="@string/sync_password_summary"
+        android:title="@string/sync_password_title"
+        app:iconSpaceReserved="false" />
+
+    <org.newnewpipe.app.settings.SyncTextPreference
+        android:key="@string/sync_blob_passphrase_key"
+        android:inputType="textPassword"
+        android:summary="@string/sync_blob_passphrase_summary"
+        android:title="@string/sync_blob_passphrase_title"
+        app:iconSpaceReserved="false" />
+
+    <org.newnewpipe.app.settings.SyncListPreference
+        android:defaultValue="60"
+        android:entries="@array/sync_interval_entries"
+        android:entryValues="@array/sync_interval_values"
+        android:key="@string/sync_interval_key"
+        android:summary="%s"
+        android:title="@string/sync_interval_title"
+        app:iconSpaceReserved="false" />
+
+    <Preference
+        android:key="@string/sync_now_key"
+        android:icon="@drawable/ic_refresh"
+        android:summary="@string/sync_now_summary"
+        android:title="@string/sync_now_title"
+        app:iconSpaceReserved="false" />
+
+</PreferenceScreen>
