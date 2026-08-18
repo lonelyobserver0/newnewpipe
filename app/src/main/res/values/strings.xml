@@ -19,6 +19,12 @@
 <string name="controls_download_desc">Download stream file</string>
 <string name="search">Search</string>
 <string name="settings">Settings</string>
+<string name="title_activity_logs">App logs</string>
+<string name="logs_refresh">Refresh</string>
+<string name="logs_copy">Copy</string>
+<string name="logs_loading">Loading logs…</string>
+<string name="logs_empty">No logs recorded for this session yet.</string>
+<string name="logs_error">Could not read the app logs.</string>
 <string name="did_you_mean">Did you mean \"%1$s\"?</string>
 <string name="search_showing_result_for">Showing results for: %s</string>
 <string name="share_dialog_title">Share with</string>

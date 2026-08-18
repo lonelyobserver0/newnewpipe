@@ -123,6 +123,7 @@ public class RouterActivity extends AppCompatActivity {
         ThemeHelper.setDayNightMode(this);
         setTheme(ThemeHelper.isLightThemeSelected(this)
                 ? R.style.RouterActivityThemeLight : R.style.RouterActivityThemeDark);
+        ThemeHelper.applyDynamicColors(this);
         Localization.assureCorrectAppLanguage(this);
     }
 

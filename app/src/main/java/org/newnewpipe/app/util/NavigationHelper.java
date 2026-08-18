@@ -50,6 +50,7 @@ import org.newnewpipe.app.local.playlist.LocalPlaylistFragment;
 import org.newnewpipe.app.local.subscription.SubscriptionFragment;
 import org.newnewpipe.app.local.subscription.SubscriptionListFragment;
 import org.newnewpipe.app.local.subscription.SubscriptionsImportFragment;
+import org.newnewpipe.app.logs.LogsActivity;
 import org.newnewpipe.app.player.PlayerService;
 import org.newnewpipe.app.player.PlayerService.PlayerType;
 import org.newnewpipe.app.player.PlayQueueActivity;
@@ -605,6 +606,11 @@ public final class NavigationHelper {
 
     public static void openAbout(final Context context) {
         final Intent intent = new Intent(context, AboutActivity.class);
+        context.startActivity(intent);
+    }
+
+    public static void openLogs(final Context context) {
+        final Intent intent = new Intent(context, LogsActivity.class);
         context.startActivity(intent);
     }
 

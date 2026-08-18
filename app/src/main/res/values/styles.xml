@@ -92,6 +92,24 @@
     <style name="Base.BlackTheme" parent="Base.V19.BlackTheme" />
     <style name="BlackTheme" parent="Base.BlackTheme"/>
 
+    <!--
+        Material You (022-S18): palette dinamica di sistema per la UI View legacy.
+        Applicata a runtime da ThemeHelper.applyDynamicColors su Android 12+ (API 31):
+        sovrascrive gli attributi colore del tema corrente con i colori system_accent1,
+        la stessa palette Material You (wallpaper) usata dal color scheme Compose.
+        Non tocca i background (windowBackground delle varianti light/dark/black resta).
+    -->
+    <style name="Theme.NewNewPipe.DynamicColors" parent="">
+        <item name="colorPrimary">@android:color/system_accent1_600</item>
+        <item name="colorPrimaryDark">@android:color/system_accent1_800</item>
+        <item name="colorAccent">@android:color/system_accent1_600</item>
+        <item name="colorSecondary">@android:color/system_accent1_600</item>
+        <item name="colorControlActivated">@android:color/system_accent1_600</item>
+        <item name="android:colorPrimary">@android:color/system_accent1_600</item>
+        <item name="android:colorPrimaryDark">@android:color/system_accent1_800</item>
+        <item name="android:colorAccent">@android:color/system_accent1_600</item>
+    </style>
+
     <!-- Dialogs -->
     <style name="LightDialogTheme" parent="Theme.AppCompat.DayNight.Dialog">
         <item name="colorPrimary">@color/light_youtube_primary_color</item>

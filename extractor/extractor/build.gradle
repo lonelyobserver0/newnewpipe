@@ -10,7 +10,7 @@ wire {
 dependencies {
     implementation project(':timeago-parser')
 
-    implementation "com.github.TeamNewPipe:nanojson:$nanojsonVersion"
+    implementation project(':nanojson')
     implementation 'org.jsoup:jsoup:1.22.2'
     implementation "org.java-websocket:Java-WebSocket:1.6.0"
     implementation "com.github.spotbugs:spotbugs-annotations:$spotbugsVersion"

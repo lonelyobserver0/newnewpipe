@@ -19,6 +19,12 @@
 <string name="controls_download_desc">Scarica il file di streaming</string>
 <string name="search">Cerca</string>
 <string name="settings">Impostazioni</string>
+<string name="title_activity_logs">Registro app</string>
+<string name="logs_refresh">Aggiorna</string>
+<string name="logs_copy">Copia</string>
+<string name="logs_loading">Caricamento log…</string>
+<string name="logs_empty">Nessun log registrato per questa sessione.</string>
+<string name="logs_error">Impossibile leggere i log dell\'app.</string>
 <string name="did_you_mean">Intendevi "%1$s"?</string>
 <string name="search_showing_result_for">Mostrando risultati per: %s</string>
 <string name="share_dialog_title">Condividi con</string>

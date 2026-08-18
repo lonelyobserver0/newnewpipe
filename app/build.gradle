@@ -182,7 +182,7 @@ dependencies {
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.5'
 
 /** NewPipe libraries **/
-    implementation 'com.github.TeamNewPipe:nanojson:1d9e1aea9049fc9f85e68b43ba39fe7be1c1f751'
+    implementation group: 'com.github.InfinityLoop1308.PipePipeExtractor', name: 'nanojson'
     implementation group: 'com.github.InfinityLoop1308.PipePipeExtractor', name: 'extractor'
 
 /** Kotlin **/

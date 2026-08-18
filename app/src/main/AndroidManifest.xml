@@ -133,6 +133,10 @@
             android:name=".about.AboutActivity"
             android:label="@string/title_activity_about_new" />
 
+        <activity
+            android:name=".logs.LogsActivity"
+            android:label="@string/title_activity_logs" />
+
         <service
             android:name=".local.subscription.services.SubscriptionsImportService"
             android:foregroundServiceType="dataSync" />

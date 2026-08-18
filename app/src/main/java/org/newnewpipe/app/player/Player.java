@@ -575,6 +575,20 @@ public final class Player implements
         setupPlayerSeekOverlay();
     }
 
+    /**
+     * Material You (fix): colore della seekbar. Prima era {@link Color#RED} hardcoded
+     * (stile YouTube); ora risolve {@code ?attr/colorPrimary} dal tema corrente, che
+     * su Android 12+ è la palette dinamica di sistema (overlay
+     * {@code Theme.NewNewPipe.DynamicColors}). Fallback: rosso.
+     */
+    private int getDynamicPrimaryColor() {
+        final TypedValue typedValue = new TypedValue();
+        if (getContext().getTheme().resolveAttribute(R.attr.colorPrimary, typedValue, true)) {
+            return typedValue.data;
+        }
+        return Color.RED;
+    }
+
     private void initViews(@NonNull final PlayerBinding playerBinding) {
         binding = playerBinding;
         setupSubtitleView();
@@ -582,9 +596,11 @@ public final class Player implements
         updateDisplayModeButtonText();
 
         binding.playbackSeekBar.getThumb()
-                .setColorFilter(new PorterDuffColorFilter(Color.RED, PorterDuff.Mode.SRC_IN));
+                .setColorFilter(new PorterDuffColorFilter(getDynamicPrimaryColor(),
+                        PorterDuff.Mode.SRC_IN));
         binding.playbackSeekBar.getProgressDrawable()
-                .setColorFilter(new PorterDuffColorFilter(Color.RED, PorterDuff.Mode.MULTIPLY));
+                .setColorFilter(new PorterDuffColorFilter(getDynamicPrimaryColor(),
+                        PorterDuff.Mode.MULTIPLY));
 
         final ContextThemeWrapper themeWrapper = new ContextThemeWrapper(getContext(),
                 R.style.DarkPopupMenu);
@@ -2744,7 +2760,8 @@ public final class Player implements
 
         binding.playbackSeekBar.setEnabled(false);
         binding.playbackSeekBar.getThumb()
-                .setColorFilter(new PorterDuffColorFilter(Color.RED, PorterDuff.Mode.SRC_IN));
+                .setColorFilter(new PorterDuffColorFilter(getDynamicPrimaryColor(),
+                        PorterDuff.Mode.SRC_IN));
 
         binding.loadingPanel.setBackgroundColor(Color.BLACK);
         animate(binding.loadingPanel, true, 0);
@@ -2780,7 +2797,8 @@ public final class Player implements
 
         binding.playbackSeekBar.setEnabled(true);
         binding.playbackSeekBar.getThumb()
-                .setColorFilter(new PorterDuffColorFilter(Color.RED, PorterDuff.Mode.SRC_IN));
+                .setColorFilter(new PorterDuffColorFilter(getDynamicPrimaryColor(),
+                        PorterDuff.Mode.SRC_IN));
 
         binding.loadingPanel.setVisibility(View.GONE);
 

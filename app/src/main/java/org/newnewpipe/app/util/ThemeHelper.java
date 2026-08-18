@@ -38,8 +38,6 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
 import androidx.preference.PreferenceManager;
 
-import com.google.android.material.color.DynamicColors;
-
 import org.newnewpipe.app.R;
 import org.newnewpipe.extractor.NewPipe;
 import org.newnewpipe.extractor.StreamingService;
@@ -76,12 +74,26 @@ public final class ThemeHelper {
      */
     public static void setTheme(final Context context, final int serviceId) {
         context.setTheme(getThemeForService(context, serviceId));
+        applyDynamicColors(context);
+    }
 
-        // Material You (022-S18): su Android 12+ applica la palette dinamica di sistema
-        // anche ai View legacy (in modo progressivo, in coerenza con i componenti Compose).
-        // Solo activity (PlayerService è un Service: il guard salta); no-op sotto API 31.
+    /**
+     * Material You (022-S18, fix): applica la palette dinamica di sistema (wallpaper)
+     * al tema View legacy.
+     * <p>
+     * NOTA: in origine si usava {@code DynamicColors.applyToActivityIfAvailable}, ma
+     * con i temi AppCompat dell'app quella chiamata è un no-op silenzioso: l'overlay
+     * di default viene risolto dall'attributo {@code dynamicColorThemeOverlay}, definito
+     * solo dai temi MaterialComponents/Material3 — quindi la UI legacy restava coi
+     * colori di default. Qui applichiamo direttamente l'overlay {@code Theme.NewNewPipe.DynamicColors}
+     * (colori {@code system_accent1}, la stessa palette del color scheme Compose),
+     * sovrascrivendo gli attributi M2 che l'app usa (colorPrimary/colorAccent/...).
+     * <p>
+     * Solo activity (PlayerService è un Service: il guard salta); no-op sotto API 31.
+     */
+    public static void applyDynamicColors(final Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && context instanceof Activity) {
-            DynamicColors.applyToActivityIfAvailable((Activity) context);
+            context.getTheme().applyStyle(R.style.Theme_NewNewPipe_DynamicColors, true);
         }
     }
 
