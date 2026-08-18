@@ -67,6 +67,16 @@ public final class PlayerHolder {
         return player.isPlaying();
     }
 
+    /**
+     * Returns the current {@link Player} (if the player service is bound), or {@code null}.
+     * Usato dai consumer esterni (es. LyricsFragment) per leggere la posizione
+     * di riproduzione corrente senza dipendere dal fragment del player.
+     */
+    @Nullable
+    public Player getPlayer() {
+        return player;
+    }
+
     public boolean isPlayerOpen() {
         return player != null;
     }

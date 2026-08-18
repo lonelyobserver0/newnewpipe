@@ -155,6 +155,8 @@ public final class VideoDetailFragment
     private static final String COMMENTS_TAB_TAG = "COMMENTS";
     private static final String RELATED_TAB_TAG = "NEXT VIDEO";
     private static final String DESCRIPTION_TAB_TAG = "DESCRIPTION TAB";
+    private static final String LYRICS_TAB_TAG = "LYRICS";
+    private static final String WATCH_TOGETHER_TAB_TAG = "WATCH_TOGETHER";
     private static final String SPONSOR_BLOCK_TAB_TAG = "SPONSOR_BLOCK TAB";
     private static final String EMPTY_TAB_TAG = "EMPTY TAB";
     private static final String VIDEO_TAB_COMMENTS = "comments";
@@ -543,14 +545,6 @@ public final class VideoDetailFragment
                     PermissionHelper.DOWNLOAD_DIALOG_REQUEST_CODE)) {
                 this.openDownloadDialog();
             }
-        } else if (id == R.id.detail_controls_watch_together) {
-            if (isPlayerAvailable()) {
-                player.onWatchTogetherClicked();
-            }
-        } else if (id == R.id.detail_controls_lyrics) {
-            if (isPlayerAvailable()) {
-                player.onLyricsClicked();
-            }
         } else if (id == R.id.detail_controls_cast) {
             if (isPlayerAvailable()) {
                 player.onCastClicked();
@@ -791,8 +785,6 @@ public final class VideoDetailFragment
         binding.detailControlsPlaylistAppend.setOnLongClickListener(this);
         binding.detailControlsDownload.setOnClickListener(this);
         binding.detailControlsDownload.setOnLongClickListener(this);
-        binding.detailControlsWatchTogether.setOnClickListener(this);
-        binding.detailControlsLyrics.setOnClickListener(this);
         binding.detailControlsCast.setOnClickListener(this);
         binding.detailControlsShare.setOnClickListener(this);
         binding.detailControlsOpenInBrowser.setOnClickListener(this);
@@ -1136,6 +1128,22 @@ public final class VideoDetailFragment
                 Log.e(TAG, "initTabs() error adding description tab", e);
             }
         }
+        // Tab Testi (022-S11): sempre presente, come Descrizione/Commenti.
+        try {
+            pageAdapter.addFragment(EmptyFragment.newInstance(false), LYRICS_TAB_TAG);
+            tabIcons.add(R.drawable.ic_music_note);
+            tabContentDescriptions.add(R.string.lyrics_tab_description);
+        } catch (IllegalStateException e) {
+            Log.e(TAG, "initTabs() error adding lyrics tab", e);
+        }
+        // Tab Guarda insieme (022-S16): sempre presente, con il proprio pannello.
+        try {
+            pageAdapter.addFragment(EmptyFragment.newInstance(false), WATCH_TOGETHER_TAB_TAG);
+            tabIcons.add(R.drawable.ic_people);
+            tabContentDescriptions.add(R.string.watch_together);
+        } catch (IllegalStateException e) {
+            Log.e(TAG, "initTabs() error adding watch together tab", e);
+        }
         if (shouldShowSponsorBlock()) {
             // temp empty fragment. will be updated in handleResult
             pageAdapter.addFragment(EmptyFragment.newInstance(false), SPONSOR_BLOCK_TAB_TAG);
@@ -1221,6 +1229,9 @@ public final class VideoDetailFragment
         if (showDescription) {
             pageAdapter.updateItem(DESCRIPTION_TAB_TAG, new DescriptionFragment(info));
         }
+
+        pageAdapter.updateItem(LYRICS_TAB_TAG, new LyricsFragment(info));
+        pageAdapter.updateItem(WATCH_TOGETHER_TAB_TAG, new WatchTogetherFragment());
 
         if (shouldShowSponsorBlock()) {
             final boolean isLiveStream = info.getStreamType() == StreamType.LIVE_STREAM;

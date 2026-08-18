@@ -5251,8 +5251,17 @@ case ERROR_CODE_DECODER_INIT_FAILED: {
                 .show();
     }
 
+    /**
+     * Sessione watch-together attiva (o {@code null}). Esposta per il tab
+     * "Guarda insieme" della pagina video (WatchTogetherFragment).
+     */
+    @Nullable
+    public WatchTogetherSession getWatchTogetherSession() {
+        return watchTogetherSession;
+    }
+
     /** Crea una stanza: genera il codice, avvia il server embedded e ci si unisce come host. */
-    private void createWatchTogetherRoom() {
+    public void createWatchTogetherRoom() {
         final String roomId = WatchTogetherRoomCode.INSTANCE.generate();
         final WatchTogetherServer server =
                 new WatchTogetherServer(WatchTogetherProtocol.DEFAULT_PORT,
@@ -5319,13 +5328,24 @@ case ERROR_CODE_DECODER_INIT_FAILED: {
                     } catch (final NumberFormatException ignored) {
                         // porta di default
                     }
-                    final String host = ip.startsWith("ws://") || ip.startsWith("http://")
-                            ? ip.substring(ip.indexOf("//") + 2)
-                            : ip;
-                    startWatchTogetherSession(code, host, null);
+                    joinWatchTogetherRoom(ip, code, port);
                 })
                 .setNegativeButton(R.string.cancel, null)
                 .show();
+    }
+
+    /**
+     * Si unisce a una stanza esistente (usato dal tab "Guarda insieme" e dal
+     * dialogo del player). L'IP può includere uno schema ws:// o http://.
+     */
+    public void joinWatchTogetherRoom(final String ip, final String code, final int port) {
+        if (watchTogetherSession != null) {
+            return;
+        }
+        final String host = ip.startsWith("ws://") || ip.startsWith("http://")
+                ? ip.substring(ip.indexOf("//") + 2)
+                : ip;
+        startWatchTogetherSession(code, host, null);
     }
 
     /**
@@ -5503,7 +5523,7 @@ case ERROR_CODE_DECODER_INIT_FAILED: {
     }
 
     /** Esce dalla stanza (bottone) e nasconde la barra. */
-    private void leaveWatchTogetherRoom() {
+    public void leaveWatchTogetherRoom() {
         stopWatchTogetherSession();
         Toast.makeText(context, R.string.watch_together_left, Toast.LENGTH_SHORT).show();
     }
@@ -6137,6 +6157,17 @@ case ERROR_CODE_DECODER_INIT_FAILED: {
 
     public boolean isStopped() {
         return exoPlayerIsNull() || simpleExoPlayer.getPlaybackState() == ExoPlayer.STATE_IDLE;
+    }
+
+    /**
+     * Posizione di riproduzione corrente in millisecondi (0 se il player non è pronto).
+     * Accessor pubblico usato dalla sincronizzazione dei testi nel tab della pagina video.
+     */
+    public int getPlayerPosition() {
+        if (exoPlayerIsNull()) {
+            return 0;
+        }
+        return Math.max((int) simpleExoPlayer.getCurrentPosition(), 0);
     }
 
     public boolean isPlaying() {

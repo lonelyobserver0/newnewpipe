@@ -1125,6 +1125,7 @@
 
     <!-- Testi sincronizzati nel player (022-S11) -->
     <string name="lyrics">Lyrics</string>
+    <string name="lyrics_tab_description">Lyrics</string>
     <string name="lyrics_loading">Loading lyrics…</string>
     <string name="lyrics_not_found">No synchronized lyrics for this track</string>
     <string name="lyrics_error">Lyrics unavailable</string>
@@ -1138,6 +1139,7 @@
     <string name="watch_together_port">Port</string>
     <string name="watch_together_leave">Leave</string>
     <string name="watch_together_participants">Participants</string>
+    <string name="watch_together_participants_empty">No participants yet — share the room code</string>
     <string name="watch_together_host">host</string>
     <string name="watch_together_guest">guest</string>
     <string name="watch_together_status">Room %1$s · %2$d participant(s) · you are %3$s</string>

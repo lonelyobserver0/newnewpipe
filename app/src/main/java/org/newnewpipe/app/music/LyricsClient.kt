@@ -131,6 +131,6 @@ class LyricsClient(
     }
 
     /** URL-encoding per query string (spazio → %20, come nel resto dell'app). */
-    private fun encode(value: String): String =
-        URLEncoder.encode(value, "UTF-8").replace("+", "%20")
+    private fun encode(value: String?): String =
+        URLEncoder.encode(value ?: "", "UTF-8").replace("+", "%20")
 }

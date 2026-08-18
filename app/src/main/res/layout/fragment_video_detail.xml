@@ -503,38 +503,6 @@
                         android:paddingBottom="@dimen/detail_control_padding">
 
                         <org.newnewpipe.app.views.NewPipeTextView
-                            android:id="@+id/detail_controls_watch_together"
-                            android:layout_width="@dimen/detail_control_width"
-                            android:layout_height="@dimen/detail_control_height"
-                            android:layout_gravity="center_vertical"
-                            android:layout_weight="1"
-                            android:background="?attr/selectableItemBackgroundBorderless"
-                            android:clickable="true"
-                            android:contentDescription="@string/watch_together"
-                            android:focusable="true"
-                            android:gravity="center"
-                            android:paddingVertical="@dimen/detail_control_padding"
-                            android:text="@string/watch_together"
-                            android:textSize="@dimen/detail_control_text_size"
-                            app:drawableTopCompat="@drawable/ic_people" />
-
-                        <org.newnewpipe.app.views.NewPipeTextView
-                            android:id="@+id/detail_controls_lyrics"
-                            android:layout_width="@dimen/detail_control_width"
-                            android:layout_height="@dimen/detail_control_height"
-                            android:layout_gravity="center_vertical"
-                            android:layout_weight="1"
-                            android:background="?attr/selectableItemBackgroundBorderless"
-                            android:clickable="true"
-                            android:contentDescription="@string/lyrics"
-                            android:focusable="true"
-                            android:gravity="center"
-                            android:paddingVertical="@dimen/detail_control_padding"
-                            android:text="@string/lyrics"
-                            android:textSize="@dimen/detail_control_text_size"
-                            app:drawableTopCompat="@drawable/ic_music_note" />
-
-                        <org.newnewpipe.app.views.NewPipeTextView
                             android:id="@+id/detail_controls_cast"
                             android:layout_width="@dimen/detail_control_width"
                             android:layout_height="@dimen/detail_control_height"
