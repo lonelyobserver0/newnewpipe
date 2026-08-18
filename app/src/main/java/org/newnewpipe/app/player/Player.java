@@ -4717,7 +4717,7 @@ case ERROR_CODE_DECODER_INIT_FAILED: {
                 binding.lyricsTextView);
     }
 
-    private void onLyricsClicked() {
+    public void onLyricsClicked() {
         if (lyricsOverlay == null) {
             return;
         }
@@ -4995,7 +4995,7 @@ case ERROR_CODE_DECODER_INIT_FAILED: {
      * e avvia lo stream sul renderer selezionato. La lista si aggiorna da sola
      * mentre il discovery trova/rimuove dispositivi.
      */
-    private void onCastClicked() {
+    public void onCastClicked() {
         final DlnaDiscoveryManager manager = DlnaDiscoveryManager.get(context);
         // I callback del registry arrivano su thread di rete: ricostruisci sul main.
         manager.setDevicesListener(devices -> {
@@ -5209,7 +5209,7 @@ case ERROR_CODE_DECODER_INIT_FAILED: {
      * dialogo della stanza (partecipanti + esci), altrimenti il menu
      * crea/unisci stanza.
      */
-    private void onWatchTogetherClicked() {
+    public void onWatchTogetherClicked() {
         if (watchTogetherSession != null) {
             showWatchTogetherSessionDialog();
             return;

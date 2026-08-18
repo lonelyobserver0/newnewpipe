@@ -543,6 +543,18 @@ public final class VideoDetailFragment
                     PermissionHelper.DOWNLOAD_DIALOG_REQUEST_CODE)) {
                 this.openDownloadDialog();
             }
+        } else if (id == R.id.detail_controls_watch_together) {
+            if (isPlayerAvailable()) {
+                player.onWatchTogetherClicked();
+            }
+        } else if (id == R.id.detail_controls_lyrics) {
+            if (isPlayerAvailable()) {
+                player.onLyricsClicked();
+            }
+        } else if (id == R.id.detail_controls_cast) {
+            if (isPlayerAvailable()) {
+                player.onCastClicked();
+            }
         } else if (id == R.id.detail_controls_share) {
             if (currentInfo != null) {
                 ShareUtils.shareText(requireContext(), currentInfo.getName(),
@@ -779,6 +791,9 @@ public final class VideoDetailFragment
         binding.detailControlsPlaylistAppend.setOnLongClickListener(this);
         binding.detailControlsDownload.setOnClickListener(this);
         binding.detailControlsDownload.setOnLongClickListener(this);
+        binding.detailControlsWatchTogether.setOnClickListener(this);
+        binding.detailControlsLyrics.setOnClickListener(this);
+        binding.detailControlsCast.setOnClickListener(this);
         binding.detailControlsShare.setOnClickListener(this);
         binding.detailControlsOpenInBrowser.setOnClickListener(this);
         binding.detailControlsStartSleepTimer.setOnClickListener(this);

@@ -438,23 +438,31 @@ public class MainActivity extends AppCompatActivity {
     private void toggleServices() {
         servicesShown = !servicesShown;
 
-        drawerLayoutBinding.navigation.getMenu().removeGroup(R.id.menu_services_group);
-        drawerLayoutBinding.navigation.getMenu().removeGroup(R.id.menu_tabs_group);
-        drawerLayoutBinding.navigation.getMenu().removeGroup(R.id.menu_options_about_group);
-
         // Show up or down arrow
         drawerHeaderBinding.drawerArrow.setImageResource(
                 servicesShown ? R.drawable.ic_arrow_drop_up : R.drawable.ic_arrow_drop_down);
 
-        if (servicesShown) {
-            showServices();
-        } else {
-            try {
-                addDrawerMenuForCurrentService();
-            } catch (final Exception e) {
-                ErrorUtil.showUiErrorSnackbar(this, "Showing main page tabs", e);
+        // Ricostruire il menu del NavigationView durante un passaggio di layout del
+        // drawer (es. onDrawerClosed, che chiama toggleServices a cassetto in chiusura)
+        // desincronizza NavigationMenuAdapter dalla RecyclerView → crash noto di
+        // Material Components "IndexOutOfBoundsException in getItemViewType"
+        // (posizione richiesta == numero di voci). Defer: la mutazione viene eseguita
+        // a layout concluso, fuori dall'animazione.
+        drawerLayoutBinding.navigation.post(() -> {
+            drawerLayoutBinding.navigation.getMenu().removeGroup(R.id.menu_services_group);
+            drawerLayoutBinding.navigation.getMenu().removeGroup(R.id.menu_tabs_group);
+            drawerLayoutBinding.navigation.getMenu().removeGroup(R.id.menu_options_about_group);
+
+            if (servicesShown) {
+                showServices();
+            } else {
+                try {
+                    addDrawerMenuForCurrentService();
+                } catch (final Exception e) {
+                    ErrorUtil.showUiErrorSnackbar(this, "Showing main page tabs", e);
+                }
             }
-        }
+        });
     }
 
     private void showServices() {
